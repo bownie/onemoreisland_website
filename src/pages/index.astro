@@ -1,27 +1,16 @@
 ---
-import { getCollection } from "astro:content";
 import { getRelativeLocaleUrl } from "astro:i18n";
-import IconRss from "@/assets/icons/IconRss.svg";
-import IconArrowRight from "@/assets/icons/IconArrowRight.svg";
 import Layout from "@/layouts/Layout.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import Socials from "@/components/Socials.astro";
-import Card from "@/components/Card.astro";
-import LinkButton from "@/components/LinkButton.astro";
-import { getSortedPosts } from "@/utils/getSortedPosts";
 import { useTranslations } from "@/i18n";
 import config from "@/config";
 
-const { socials, posts: postsConfig } = config;
+const { socials } = config;
 
 const locale = Astro.currentLocale ?? config.site.lang;
 const t = useTranslations(locale);
-
-const posts = await getCollection("posts");
-const sortedPosts = getSortedPosts(posts);
-const featuredPosts = sortedPosts.filter(({ data }) => data.featured);
-const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
 const homePath = getRelativeLocaleUrl(locale, "");
 ---
 
@@ -53,44 +42,9 @@ const homePath = getRelativeLocaleUrl(locale, "");
         and her book website <a href="https://theartengager.com" target="_blank">The Art Engager</a>.
       </p>
 
-      <p class="mt-2">
-        Read the blog posts or check
-        <LinkButton
-          class="hover:text-accent underline decoration-dashed underline-offset-4"
-          href="https://github.com/satnaing/astro-paper#readme"
-        >
-          README
-        </LinkButton> for more info.
-      </p>
-      {
-        socials.length > 0 && (
-          <div class="mt-4 flex max-sm:flex-col sm:items-center">
-            <div class="me-2 mb-1 whitespace-nowrap sm:mb-0">
-              {t.home.socialLinks}:
-            </div>
-            <Socials />
-          </div>
-        )
-      }
     </section>
 
-    <div class="my-8 text-center">
-    RSS Feed
-      <a
-          target="_blank"
-          href={getRelativeLocaleUrl(locale, "rss.xml")}
-          class="inline-block"
-          aria-label="RSS Feed"
-          title="RSS Feed"
-        >
-          <IconRss
-            width={20}
-            height={20}
-            class="stroke-accent scale-125 stroke-3 rtl:-rotate-90"
-          />
-          <span class="sr-only">RSS Feed</span>
-        </a>
-     </div>
+
 
 
   </main>
