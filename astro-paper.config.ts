@@ -2,9 +2,9 @@ import { defineAstroPaperConfig } from "./src/types/config";
 
 export default defineAstroPaperConfig({
   site: {
-    url: "https://bowngroup.com/",
-    title: "Bowngroup",
-    description: "All about what the Bowns are getting up to on the internet.",
+    url: "https://onemoreislandbook.com/",
+    title: "One More Island",
+    description: "The new novel from Richard W. Bown. Coming Fall 2026.",
     author: "Richard Bown",
     profile: "https://richardwbown.com",
     ogImage: "default-og.jpg",
