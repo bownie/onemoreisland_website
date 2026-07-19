@@ -95,6 +95,24 @@ const rssHref = getRelativeLocaleUrl(
       )
     }
 
+    {
+      site.googleTagId && (
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${site.googleTagId}`}></script>
+      )
+    }
+    {
+      site.googleTagId && (
+        <script is:inline>
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${site.googleTagId}');
+          `}
+        </script>
+      )
+    }
+
     <!--
       Inline FOUC-prevention script: sets data-theme on <html> before
       the browser paints. Runs synchronously, no defer/async.
