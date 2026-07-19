@@ -31,7 +31,7 @@ export default defineAstroPaperConfig({
   socials: [
     { name: "bluesky",   url: "https://bsky.app/profile/bownie.bsky.social" },
     { name: "linkedin",  url: "https://www.linkedin.com/in/richard-bown/" },
-    { name: "instagram", url: "https://www.instagram.com/richard_w_bown_writer/" },
+    { name: "substack",  url: "https://www.substack.com/@richardwbown" },
   ],
   shareLinks: [
     { name: "whatsapp", url: "https://wa.me/?text=" },
