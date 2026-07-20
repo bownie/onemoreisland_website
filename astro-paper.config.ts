@@ -3,8 +3,8 @@ import { defineAstroPaperConfig } from "./src/types/config";
 export default defineAstroPaperConfig({
   site: {
     url: "https://onemoreislandbook.com/",
-    title: "One More Island",
-    description: "The new novel from Richard W. Bown. Coming Fall 2026.",
+    title: "One More Island - the new novel by Richard W. Bown",
+    description: "The new novel from Richard W. Bown. Coming 2027.",
     author: "Richard Bown",
     profile: "https://richardwbown.com",
     ogImage: "default-og.jpg",
