@@ -8,7 +8,7 @@ export default defineAstroPaperConfig({
     description: "The new novel from Richard W. Bown. Coming 2027.",
     author: "Richard Bown",
     profile: "https://richardwbown.com",
-    ogImage: "one-more-island-book-min.jpg",
+    ogImage: "one-more-island-social.jpg",
     lang: "en",
     timezone: "Europe/Amsterdam",
     dir: "ltr",
