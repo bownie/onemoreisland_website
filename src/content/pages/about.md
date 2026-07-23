@@ -7,7 +7,7 @@ A contemporary novel about two brothers, a fractured family, and a man who disco
 
 The events take place more than ten years before Human Software but in the same fictional port town of Sandport in South East Kent and also featuring end of the century London and Essex as its locations.
 
-Richard W. Bown is a writer and software engineer who loves to explore life, work and the stories that every day brings. As a lifelong computer programmer, he’s worked in large companies throughout his thirty-year career, taking regular breaks to work on creative projects. One More Island is his second novel.
+Richard W. Bown is a writer and engineer who loves to explore life, work and the stories that every day brings. As a lifelong computer programmer, he’s worked in large companies throughout his thirty-year career, taking regular breaks to work on creative projects. One More Island is his second novel.
 
 His debut, Human Software, was published in 2025. 
 
