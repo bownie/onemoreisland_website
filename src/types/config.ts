@@ -111,6 +111,7 @@ type ResolvedSiteConfig = Required<
     SiteConfig,
     | "url"
     | "title"
+    | "shortTitle"
     | "description"
     | "author"
     | "lang"
