@@ -3,6 +3,8 @@ interface SiteConfig {
   url: string;
   /** Blog title shown in header and meta tags */
   title: string;
+  /** Short header title shown in the site header */
+  shortTitle?: string;
   /** Short description used in SEO meta and RSS feed */
   description: string;
   /** Default post author name */

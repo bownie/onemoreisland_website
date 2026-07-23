@@ -16,7 +16,7 @@ const homePath = getRelativeLocaleUrl(locale, "");
 ---
 
 <Layout>
-  <Header titleOverride="One More Island" />
+  <Header />
   <main
     id="main-content"
     data-layout="index"
@@ -24,16 +24,17 @@ const homePath = getRelativeLocaleUrl(locale, "");
     class="app-layout"
   >
     <section id="hero" class="bg-accent/5 border border-accent/20 rounded-3xl p-8 sm:p-10 shadow-[0_20px_40px_rgba(0,108,172,0.12)] space-y-10">
+<!--
       
       <div class="app-prose mx-auto max-w-prose space-y-6 text-base leading-8 text-muted-foreground text-justify">
         <h1 class="text-2xl sm:text-3xl font-semibold text-accent">Coming soon from Richard W. Bown</h1>
       </div>
 
+    -->
       <img src="/one-more-island-book-min.jpg"
            alt="One More Island book cover"
            class="mx-auto block w-5/12 sm:w-1/3 max-w-sm rounded-3xl shadow-lg bg-transparent"
       />
-
       <div class="mx-auto max-w-prose space-y-6 text-base leading-8 text-muted-foreground text-justify">
         <p> 
         Peter Watchett is adrift in Sandport. A man trapped by the sudden awareness of his own
@@ -45,30 +46,34 @@ const homePath = getRelativeLocaleUrl(locale, "");
         he is forced to confront old stories, the lies he has lived by, and the questions
         he has been hoping to avoid.
         </p>
-        <p>
-        As Peter reconnects with those around him, he discovers that rebuilding a life isn't
-        about changing the past but finding something worth clinging on to.
-        </p>    
-        <p>
-        Set between the relentless pace of London and the quiet coastline of Kent, <b>One More Island</b>
-        is a moving novel about family, identity, regret and the fragile hope of another chance.
-        </p>
-        <p>
-        <b>One More Island</b> is the new novel from Richard W. Bown.
-        </p>
-        
-        <p>
-          <i>Coming early 2027.</i>
-        </p>
 
-        <p>
-          Sign up below to get book news, writing updates, and launch information straight to your inbox.
-        </p>
+        <section id="newsletter" class="mt-12 sm:mt-16">
+          <h2 class="text-2xl sm:text-2xl font-semibold">Intrigued?</h2>
+          <p class="text-lg sm:text-xs font-normal">Join my newsletter for updates along the way to publication.</p>
+          <NewsletterSignup title="Sign up for updates" description="Get book news, writing updates, and launch information straight to your inbox." />
+        </section>
+
+        <section id="about" class="mt-12 sm:mt-16">
+          <div class="mx-auto max-w-prose space-y-6 text-base leading-8 text-muted-foreground text-justify">
+            <p>
+            As Peter reconnects with those around him, he discovers that rebuilding a life isn't
+            about changing the past but finding something worth clinging on to.
+            </p>    
+            <p>
+            Set between the relentless pace of London and the quiet coastline of Kent, <b>One More Island</b>
+            is a moving novel about family, identity, regret and the fragile hope of another chance.
+            </p>
+            <p>
+            <b>One More Island</b> is the new novel from Richard W. Bown.
+            </p>
+            <p>
+              <i>Coming early 2027.</i>
+            </p>
+          </div>
+
+        </section>
       </div>
 
-      <section id="newsletter" class="mt-12 sm:mt-16">
-        <NewsletterSignup title="Sign up for updates" description="Get book news, writing updates, and launch information straight to your inbox." />
-      </section>
     </section>
     </main>
     <Footer />

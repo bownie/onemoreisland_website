@@ -14,6 +14,7 @@ import config from "@/config";
 
 const { site, features } = config;
 const { titleOverride }: { titleOverride?: string } = Astro.props;
+const headerTitle = titleOverride ?? site.shortTitle ?? site.title;
 
 const locale = Astro.currentLocale ?? config.site.lang;
 const t = useTranslations(locale);
@@ -53,7 +54,7 @@ const isActive = (path: string) => {
       href={getRelativeLocaleUrl(locale, "")}
       class="absolute py-1 text-xl leading-8 font-semibold whitespace-nowrap sm:static sm:my-auto sm:text-2xl sm:leading-none"
     >
-      {titleOverride ?? site.title}
+      {headerTitle}
     </a>
     <nav
       id="nav-menu"
