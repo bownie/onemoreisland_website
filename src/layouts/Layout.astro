@@ -101,13 +101,15 @@ const rssHref = getRelativeLocaleUrl(
     }
     {
       site.googleTagId && (
-        <script is:inline>
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', '${site.googleTagId}');
-          `}
+        <script
+          is:inline
+          define:vars={{ googleTagId: site.googleTagId }}
+        >
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', googleTagId);
         </script>
       )
     }
