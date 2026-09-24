@@ -13,7 +13,7 @@ of the past while trying to make a living in a deeply divided country.
 
 ## About the Author
 
-Richard W. Bown is a writer and programemr. Alongside a career spanning more
+Richard W. Bown is a writer and programmer. Alongside a career spanning more
 than thirty years, he has explored fiction, music and essays about work and 
 the stories that connect us.
 
