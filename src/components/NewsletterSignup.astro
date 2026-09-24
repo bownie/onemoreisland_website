@@ -2,6 +2,8 @@
 const { title = "Join the newsletter", description = "Stay updated with new writing, book news, and more." } = Astro.props;
 ---
 <section class="newsletter-signup rounded-3xl border border-border bg-surface p-8 shadow-lg sm:p-10">
+  <h2>{title}</h2>
+  <p>{description}</p>
 <script is:inline>
   document.addEventListener('astro:page-load', () => {
     const form = document.querySelector('.newsletter-signup form');

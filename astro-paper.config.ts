@@ -33,6 +33,7 @@ export default defineAstroPaperConfig({
   socials: [
     { name: "bluesky",   url: "https://bsky.app/profile/bownie.bsky.social" },
     { name: "linkedin",  url: "https://www.linkedin.com/in/richard-bown/" },
+    { name: "hardbitten", url: "https://hardbittensoftie.com", linkTitle: "Hard-Bitten Softie" },
     { name: "substack",  url: "https://www.substack.com/@richardwbown" },
   ],
   shareLinks: [

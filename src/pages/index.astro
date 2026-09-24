@@ -4,84 +4,54 @@ import Layout from "@/layouts/Layout.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import NewsletterSignup from "@/components/NewsletterSignup.astro";
-import Socials from "@/components/Socials.astro";
-import { useTranslations } from "@/i18n";
 import config from "@/config";
 
-const { socials } = config;
-
 const locale = Astro.currentLocale ?? config.site.lang;
-const t = useTranslations(locale);
 const homePath = getRelativeLocaleUrl(locale, "");
 ---
 
 <Layout>
   <Header />
-  <main
-    id="main-content"
-    data-layout="index"
-    data-home-path={homePath}
-    class="app-layout"
-  >
-    <section id="hero" class="bg-accent/5 border border-accent/20 rounded-3xl p-8 sm:p-10 shadow-[0_20px_40px_rgba(0,108,172,0.12)] space-y-10">
-<!--
-      
-      <div class="app-prose mx-auto max-w-prose space-y-6 text-base leading-8 text-muted-foreground text-justify">
-        <h1 class="text-2xl sm:text-3xl font-semibold text-accent">Coming soon from Richard W. Bown</h1>
+  <main id="main-content" data-layout="index" data-home-path={homePath} class="app-layout island-home">
+    <section class="island-hero" aria-labelledby="hero-title">
+      <img src="/contours.svg" alt="" class="island-contours" />
+      <div class="island-hero-grid">
+        <div>
+          <p class="island-eyebrow">From the author of Human Software</p>
+          <h1 id="hero-title">It's never too late to <em>start again.</em></h1>
+          <p class="island-subtitle">A novel about family, identity, regret, and the fragile hope of another chance.</p>
+          <a class="island-button inline-block rounded-full bg-accent px-6 py-3 font-bold text-accent-foreground" href="#join">Join the readers' list</a>
+          <p class="island-when">Coming early 2027</p>
+        </div>
+        <img src="/one-more-island-book-min.jpg" alt="One More Island book cover" class="island-cover" />
       </div>
-
-    -->
-      <p class="text-lg sm:text-md font-normal">From the author of Human Software.</p>
-
-      <img src="/one-more-island-book-min.jpg"
-           alt="One More Island book cover"
-           class="mx-auto block w-5/12 sm:w-1/3 max-w-sm rounded-3xl shadow-lg bg-transparent"
-      />
-      <div class="mx-auto max-w-prose space-y-6 text-base leading-8 text-muted-foreground text-justify">
-        <p> 
-        Peter Watchett is adrift in Sandport. A man trapped by the sudden awareness of his own
-        mortality, carrying secrets he’s never acknowledged and a past that still haunts him.
-        </p>
-        <p>
-        Seeking refuge on the Kent coast, Peter has withdrawn from the life he once knew to
-        rediscover a forgotten dream. But peace proves elusive. As old relationships resurface,
-        he is forced to confront old stories, the lies he has lived by, and the questions
-        he has been hoping to avoid.
-        </p>
-
-        <section id="newsletter" class="mt-12 sm:mt-16">
-          <div class="mx-auto max-w-prose space-y-6 text-base leading-8 text-muted-foreground text-justify">
-            <h2 class="text-2xl sm:text-2xl font-semibold">Intrigued?</h2>
-            <p class="text-lg sm:text-xs font-normal">Join my newsletter for writing updates, publication news and opportunities to become an early ARC reader.</p>
-            <NewsletterSignup title="Sign up for updates" description="Get book news, writing updates, and launch information straight to your inbox." />
-          </div>
-        </section>
-
-        <section id="about" class="mt-12 sm:mt-16">
-          <div class="mx-auto max-w-prose space-y-6 text-base leading-8 text-muted-foreground text-justify">
-            <p>
-            As Peter reconnects with those around him, he discovers that rebuilding a life isn't
-            about changing the past but finding something worth clinging on to.
-            </p>    
-            <p>
-            Set between the relentless pace of London and the quiet coastline of Kent, <b>One More Island</b>
-            is a moving novel about family, identity, regret and the fragile hope of another chance.
-            </p>
-            <p>
-            <b>One More Island</b> is the new novel from Richard W. Bown.
-            </p>
-            <p>
-              <i>Coming early 2027.</i>
-            </p>
-          </div>
-
-        </section>
-      </div>
-
     </section>
-    </main>
-    <Footer />
-  </Layout>
+
+    <section class="py-16 sm:py-20" aria-labelledby="story-title">
+      <div class="island-story">
+        <h2 id="story-title" class="sr-only">About One More Island</h2>
+        <p class="lead">Set between the relentless pace of London and the quiet coastline of Kent, <b>One More Island</b> is a moving novel about family, identity, regret and the fragile hope of another chance.</p>
+        <p>Peter Watchett is adrift in Sandport. A man trapped by the sudden awareness of his own mortality, carrying secrets he’s never acknowledged and a past that still haunts him.</p>
+        <p>Seeking refuge on the Kent coast, Peter has withdrawn from the life he once knew to rediscover a forgotten dream. But peace proves elusive. As old relationships resurface, he is forced to confront old stories, the lies he has lived by, and the questions he has been hoping to avoid.</p>
+        <p>As Peter reconnects with those around him, he discovers that rebuilding a life isn't about changing the past but finding something worth clinging on to.</p>
+      </div>
+    </section>
+
+    <section class="pb-16 sm:pb-20" aria-label="The worlds of the novel">
+      <div class="island-split">
+        <div class="island-tile island-tile-london"><h2>London</h2><p>The relentless pace.</p></div>
+        <div class="island-tile island-tile-kent"><h2>Kent</h2><p>The quiet coastline.</p></div>
+      </div>
+    </section>
+
+    <section id="join" class="island-signup mb-16 sm:mb-20" aria-labelledby="join-title">
+      <h2 id="join-title">Intrigued?</h2>
+      <p>Join my newsletter for writing updates, publication news and opportunities to become an early ARC reader.</p>
+      <NewsletterSignup title="Sign up for updates" description="Get book news, writing updates, and launch information straight to your inbox." />
+    </section>
+  </main>
+  <Footer />
+</Layout>
 
 <script>
   document.addEventListener("astro:page-load", () => {
