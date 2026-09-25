@@ -43,6 +43,14 @@
   .island-header-about { color: var(--muted-foreground); font-size: 1rem; text-decoration: none; }
   .island-header-about:hover { color: var(--accent); }
   .island-footer { font-family: "DM Sans", sans-serif; }
+  .island-about { font-family: "DM Sans", sans-serif; padding-bottom: 4rem; }
+  .island-about > h1 { margin: 1rem 0 2.5rem; color: var(--foreground); font-family: "Fraunces", Georgia, serif; font-size: clamp(2.25rem, 4.5vw, 3.5rem) !important; font-weight: 400 !important; line-height: 1.05; }
+  .island-about > :not(h1) { max-width: 72ch; }
+  .island-about h2 { margin-top: 3.5rem; color: var(--foreground); font-family: "Fraunces", Georgia, serif; font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 400; line-height: 1.15; }
+  .island-about p { color: var(--muted-foreground); font-size: 1.06rem; line-height: 1.7; }
+  .island-about a { color: var(--foreground); }
+  .island-about a:hover { color: var(--accent); }
+  .island-about img { margin-top: 2.5rem; margin-bottom: 2.5rem; border: 0; border-radius: 0.875rem; box-shadow: 0 24px 50px -18px rgb(20 40 50 / 45%), 0 4px 12px rgb(20 40 50 / 15%); }
   .island-home { font-family: "DM Sans", sans-serif; font-size: 1.06rem; line-height: 1.7; }
   .island-home h1, .island-home h2, .island-home .serif { font-family: "Fraunces", Georgia, serif; }
   .island-hero { position: relative; overflow: hidden; background: var(--muted); border-radius: 1.75rem; padding: clamp(2rem, 6vw, 4.5rem); }

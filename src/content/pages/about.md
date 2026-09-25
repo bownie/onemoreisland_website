@@ -3,19 +3,14 @@ title: "About"
 description: "What is One More Island about?"
 ---
 
-One More Island is a contemporary novel about a fractured family, and a man discovering that it’s possible to start again in a town he thought he would never return to. Set in the coastal south east of England, it explores the stories families tell, the secrets they keep, and the difficult work of finding your way back to the people you've lost.
+One More Island is a contemporary novel about a fractured family, and a man discovering that it’s possible to start again in a town he thought he would never return to. Returning to the coastal town of Sandport in south east of England, it explores the stories families tell, the secrets they keep, and the difficult work of finding your way back to the people you've lost.
 
-Taking place more than a decade before <b>Human Software</b>, we return to the same fictional Kentish town of Sandport while also visiting Essex and London.
-
-If you've read and enjoyed Human Software you'll remember Peter Watchett.
-Returing to Sandport, a town he once called home, he must deal with echoes
-of the past while trying to make a living in a deeply divided country.
+Taking place in 2014, Peter Watchett returns to a town he once called home
+to deal echoes of the past while trying to make a living in an increasingly divided country.
 
 ## About the Author
 
-Richard W. Bown is a writer and programmer. Alongside a career spanning more
-than thirty years, he has explored fiction, music and essays about work and 
-the stories that connect us.
+Richard W. Bown is a writer and software engineer. Alongside a career spanning more than thirty years, he has explored fiction, music and essays about work and the stories that connect us.
 
 One More Island is his second novel. His debut, Human Software, was published in 2025.
 
