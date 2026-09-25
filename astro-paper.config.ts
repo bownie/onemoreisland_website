@@ -7,7 +7,7 @@ export default defineAstroPaperConfig({
     shortTitle: "One More Island",
     description: "Peter Watchett returns to Sandport to confront his past and seek redemption.",
     author: "Richard Bown",
-    profile: "https://richardwbown.com",
+    profile: "https://hardbittensoftie.com",
     ogImage: "one-more-island-social.jpg",
     lang: "en",
     timezone: "Europe/Amsterdam",
