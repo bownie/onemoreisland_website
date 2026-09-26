@@ -2,6 +2,8 @@
 import { getRelativeLocaleUrl } from "astro:i18n";
 import { useTranslations } from "@/i18n";
 import config from "@/config";
+import IconMoon from "@/assets/icons/IconMoon.svg";
+import IconSunHigh from "@/assets/icons/IconSunHigh.svg";
 
 const { site } = config;
 const { titleOverride }: { titleOverride?: string } = Astro.props;
@@ -21,7 +23,19 @@ const t = useTranslations(locale);
 
 <header class="app-layout island-header">
   <div class="island-header-inner">
-    <a href={getRelativeLocaleUrl(locale, "")} class="island-header-title">{headerTitle}</a>
+    <div class="island-header-left">
+      <button
+        id="theme-btn"
+        type="button"
+        class="island-header-theme"
+        aria-label="Toggle theme"
+        title="Toggle theme"
+      >
+        <IconSunHigh class="island-header-icon island-header-icon-sun" />
+        <IconMoon class="island-header-icon island-header-icon-moon" />
+      </button>
+      <a href={getRelativeLocaleUrl(locale, "")} class="island-header-title">{headerTitle}</a>
+    </div>
     <a href={getRelativeLocaleUrl(locale, "about")} class="island-header-about">{t.nav.about}</a>
   </div>
 </header>
