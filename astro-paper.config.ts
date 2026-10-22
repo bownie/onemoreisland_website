@@ -5,7 +5,7 @@ export default defineAstroPaperConfig({
     url: "https://onemoreislandbook.com/",
     title: "One More Island - the new novel from Richard W. Bown coming in 2027",
     shortTitle: "One More Island",
-    description: "Peter Watchett returns to Sandport to confront his past and seek redemption.",
+    description: "Peter Watchett ran to Sandport to escape the life he built in London. When his estranged brother returns, Peter must face the truth and decide whether to start again.",
     author: "Richard Bown",
     profile: "https://hardbittensoftie.com",
     ogImage: "one-more-island-social.jpg",

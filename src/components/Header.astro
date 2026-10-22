@@ -28,14 +28,19 @@ const t = useTranslations(locale);
         id="theme-btn"
         type="button"
         class="island-header-theme"
-        aria-label="Toggle theme"
-        title="Toggle theme"
+        aria-label="Switch theme"
+        title="Switch theme"
+        aria-pressed="false"
       >
         <IconSunHigh class="island-header-icon island-header-icon-sun" />
         <IconMoon class="island-header-icon island-header-icon-moon" />
       </button>
-      <a href={getRelativeLocaleUrl(locale, "")} class="island-header-title">{headerTitle}</a>
+      <a href={getRelativeLocaleUrl(locale, "")} class="island-header-title"
+        >{headerTitle}</a
+      >
     </div>
-    <a href={getRelativeLocaleUrl(locale, "about")} class="island-header-about">{t.nav.about}</a>
+    <a href={getRelativeLocaleUrl(locale, "about")} class="island-header-about"
+      >{t.nav.about}</a
+    >
   </div>
 </header>

@@ -3,10 +3,9 @@ title: "About"
 description: "What is One More Island about?"
 ---
 
-One More Island is a contemporary novel about a fractured family, and a man discovering that it’s possible to start again in a town he thought he would never return to. Returning to the coastal town of Sandport in south east of England, it explores the stories families tell, the secrets they keep, and the difficult work of finding your way back to the people you've lost.
+Peter Watchett feels old and alone. He ran to Sandport to escape the life he'd built for himself in London, but secrets don't keep in a place that already knows you. When Peter's estranged brother walks back into town, he must confront the hidden truth and decide whether he keeps running or finally starts to build a new life for himself.
 
-Taking place in 2014, Peter Watchett returns to a town he once called home
-to deal echoes of the past while trying to make a living in an increasingly divided country.
+Set in 2014 in the coastal town of Sandport in south east England, _One More Island_ explores family, identity, regret and the fragile hope of another chance.
 
 ## About the Author
 
