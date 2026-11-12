@@ -6,7 +6,10 @@ import IconMoon from "@/assets/icons/IconMoon.svg";
 import IconSunHigh from "@/assets/icons/IconSunHigh.svg";
 
 const { site } = config;
-const { titleOverride }: { titleOverride?: string } = Astro.props;
+const {
+  titleOverride,
+  showHomeLinks = false,
+}: { titleOverride?: string; showHomeLinks?: boolean } = Astro.props;
 const headerTitle = titleOverride ?? site.shortTitle ?? site.title;
 
 const locale = Astro.currentLocale ?? config.site.lang;
@@ -39,8 +42,25 @@ const t = useTranslations(locale);
         >{headerTitle}</a
       >
     </div>
-    <a href={getRelativeLocaleUrl(locale, "about")} class="island-header-about"
-      >{t.nav.about}</a
-    >
+    <nav class="island-header-nav" aria-label="Main navigation">
+      {
+        showHomeLinks && (
+          <>
+            <a href="#story" class="island-header-about">
+              Story
+            </a>
+            <a href="#signup" class="island-header-about">
+              Sign up
+            </a>
+          </>
+        )
+      }
+      <a
+        href={getRelativeLocaleUrl(locale, "about")}
+        class="island-header-about"
+      >
+        {t.nav.about}
+      </a>
+    </nav>
   </div>
 </header>

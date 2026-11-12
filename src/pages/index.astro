@@ -11,7 +11,7 @@ const homePath = getRelativeLocaleUrl(locale, "");
 ---
 
 <Layout>
-  <Header />
+  <Header showHomeLinks />
   <main
     id="main-content"
     data-layout="index"
@@ -29,10 +29,7 @@ const homePath = getRelativeLocaleUrl(locale, "");
             London. Now his estranged brother is back, and the past is catching
             up.
           </p>
-          <a
-            class="island-button bg-accent text-accent-foreground inline-block rounded-full px-6 py-3 font-bold"
-            href="#join">Join the readers' list</a
-          >
+          <a class="island-button" href="#signup">Join the readers' list</a>
           <p class="island-when">Coming early 2027</p>
         </div>
         <img
@@ -43,10 +40,12 @@ const homePath = getRelativeLocaleUrl(locale, "");
       </div>
     </section>
 
-    <section class="py-16 sm:py-20" aria-labelledby="story-title">
-      <div class="island-story">
+    <section id="story" class="island-story" aria-labelledby="story-title">
+      <div class="island-story-heading">
         <h2 id="story-title">The story</h2>
         <h3>A place that already knows you</h3>
+      </div>
+      <div class="island-story-copy">
         <p class="lead">
           Peter Watchett keeps telling himself that he's happy. He ran to
           Sandport to escape a life that he didn't like anymore. He escaped a
@@ -55,15 +54,15 @@ const homePath = getRelativeLocaleUrl(locale, "");
           into town, he must confront the past and decide whether he keeps
           running or finally start to build a new life.
         </p>
+        <blockquote class="island-pull-quote">
+          An overlooked old man, moving deliberately from room to room, fixing
+          the things that break.
+        </blockquote>
       </div>
     </section>
 
-    <section
-      id="join"
-      class="island-signup mb-16 sm:mb-20"
-      aria-labelledby="join-title"
-    >
-      <h2 id="join-title">Sign up to stay informed</h2>
+    <section id="signup" class="island-signup" aria-labelledby="signup-title">
+      <h2 id="signup-title">Sign up to stay informed</h2>
       <p>
         Join my newsletter for writing updates, publication news and
         opportunities to become an early ARC reader.

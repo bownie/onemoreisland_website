@@ -17,10 +17,41 @@ const {
 
 <style>
   :global(.ml-embedded form) {
-    margin-left: auto !important;
-    margin-right: 0 !important;
+    margin: 0 !important;
   }
 </style>
+
+<script>
+  let emailLabelObserver: MutationObserver | undefined;
+
+  const addEmailLabels = (root: ParentNode) => {
+    root
+      .querySelectorAll<HTMLInputElement>('input[type="email"]')
+      .forEach(input => {
+        if (input.labels?.length) return;
+        if (!input.id) input.id = "island-newsletter-email";
+
+        const label = document.createElement("label");
+        label.className = "newsletter-email-label";
+        label.htmlFor = input.id;
+        label.textContent = "Email";
+        input.before(label);
+      });
+  };
+
+  const observeNewsletterForm = () => {
+    emailLabelObserver?.disconnect();
+    const root = document.querySelector(".island-signup .ml-embedded");
+    if (!root) return;
+
+    addEmailLabels(root);
+    emailLabelObserver = new MutationObserver(() => addEmailLabels(root));
+    emailLabelObserver.observe(root, { childList: true, subtree: true });
+  };
+
+  document.addEventListener("astro:page-load", observeNewsletterForm);
+  observeNewsletterForm();
+</script>
 
 <script is:inline>
   (function (w, d, e, u, f, l, n) {
