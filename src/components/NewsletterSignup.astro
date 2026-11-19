@@ -67,9 +67,10 @@ const consentValue = "yes - onemoreislandbook.com privacy policy v1";
           required
         />
         <span>
-          Yes, email me occasional news about <em>One More Island</em> and
-          Richard Bown's writing. I understand I can unsubscribe at any time.
-          See the <a href="/privacy/">privacy policy</a>.
+          Yes, email me occasional news about <em>One More Island</em> and Richard
+          Bown's writing. I understand I can unsubscribe at any time. See the <a
+            href="/privacy/">privacy policy</a
+          >.
         </span>
       </label>
 
@@ -102,9 +103,13 @@ const consentValue = "yes - onemoreislandbook.com privacy policy v1";
     event.preventDefault();
 
     const status = form.querySelector<HTMLElement>(".newsletter-status");
-    const button = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+    const button = form.querySelector<HTMLButtonElement>(
+      'button[type="submit"]'
+    );
     const email = form.querySelector<HTMLInputElement>('input[type="email"]');
-    const honeypot = form.querySelector<HTMLInputElement>('input[name="website"]');
+    const honeypot = form.querySelector<HTMLInputElement>(
+      'input[name="website"]'
+    );
     const consent = form.querySelector<HTMLInputElement>(
       'input[name="fields[consent]"]'
     );
