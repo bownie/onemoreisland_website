@@ -1,7 +1,9 @@
 ---
 import type { HTMLAttributes } from "astro/types";
+import { getRelativeLocaleUrl } from "astro:i18n";
 import Socials from "./Socials.astro";
 import { useTranslations } from "@/i18n";
+import config from "@/config";
 
 type Props = {
   noMarginTop?: boolean;
@@ -11,10 +13,18 @@ const { noMarginTop = false, class: className, ...attrs } = Astro.props;
 
 const t = useTranslations(Astro.currentLocale);
 const currentYear = new Date().getFullYear();
+const privacyHref = getRelativeLocaleUrl(
+  Astro.currentLocale ?? config.site.lang,
+  "privacy"
+);
 ---
 
 <footer
-  class:list={["app-layout island-footer", { "mt-auto": !noMarginTop }, className]}
+  class:list={[
+    "app-layout island-footer",
+    { "mt-auto": !noMarginTop },
+    className,
+  ]}
   {...attrs}
 >
   <div
@@ -28,6 +38,7 @@ const currentYear = new Date().getFullYear();
     </div>
     <div class="flex flex-col items-center gap-2 sm:flex-row-reverse">
       <Socials />
+      <a class="island-footer-privacy" href={privacyHref}>Privacy</a>
     </div>
   </div>
 </footer>

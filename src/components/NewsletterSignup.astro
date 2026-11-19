@@ -3,6 +3,18 @@ const {
   title = "Join the newsletter",
   description = "Stay updated with new writing, book news, and more.",
 } = Astro.props;
+
+// MailerLite embed endpoint for account 2727806, form S0sPwI.
+// Posting to it directly means the form works without MailerLite's
+// universal.js, which some browsers and ad blockers prevent from loading.
+const endpoint =
+  "https://assets.mailerlite.com/jsonp/2727806/forms/201864919215245018/subscribe";
+
+// Proof of consent, stored against the subscriber in the MailerLite custom
+// field `consent` (Subscribers -> Fields, Text). MailerLite drops fields that
+// have not been created in the account, so that field has to exist for this
+// to be recorded; the signup itself still works either way.
+const consentValue = "yes - onemoreislandbook.com privacy policy v1";
 ---
 
 <section
@@ -12,65 +24,166 @@ const {
     <h2 class="text-foreground text-xl">{title}</h2>
     <p class="text-muted-foreground mt-2 text-sm leading-7">{description}</p>
   </div>
-  <div class="ml-embedded w-full lg:justify-self-end" data-form="S0sPwI"></div>
+  <div class="w-full lg:justify-self-end">
+    <form
+      class="newsletter-form"
+      method="post"
+      action={endpoint}
+      data-endpoint={endpoint}
+    >
+      <div class="newsletter-field">
+        <label class="newsletter-email-label" for="newsletter-email">
+          Email address
+        </label>
+        <input
+          id="newsletter-email"
+          type="email"
+          name="fields[email]"
+          placeholder="Your email address"
+          autocomplete="email"
+          inputmode="email"
+          required
+        />
+      </div>
+
+      <div class="newsletter-honeypot" aria-hidden="true">
+        <label for="newsletter-website">Leave this field empty</label>
+        <input
+          id="newsletter-website"
+          type="text"
+          name="website"
+          tabindex="-1"
+          autocomplete="off"
+        />
+      </div>
+
+      <label class="newsletter-consent" for="newsletter-consent">
+        <input
+          type="checkbox"
+          id="newsletter-consent"
+          name="fields[consent]"
+          value={consentValue}
+          data-consent-value={consentValue}
+          required
+        />
+        <span>
+          Yes, email me occasional news about <em>One More Island</em> and Richard
+          Bown's writing. I understand I can unsubscribe at any time. See the <a
+            href="/privacy/">privacy policy</a
+          >.
+        </span>
+      </label>
+
+      <input type="hidden" name="ml-submit" value="1" />
+      <input type="hidden" name="anticsrf" value="true" />
+
+      <button type="submit">Subscribe</button>
+
+      <p class="newsletter-status" role="status" aria-live="polite"></p>
+
+      <p class="newsletter-fineprint">
+        You can unsubscribe anytime. For more details, review our
+        <a href="/privacy/">Privacy Policy</a>.
+      </p>
+    </form>
+  </div>
 </section>
 
 <style>
-  :global(.ml-embedded form) {
-    margin: 0 !important;
+  .newsletter-form button[type="submit"] {
+    margin: 0;
   }
 </style>
 
 <script>
-  let emailLabelObserver: MutationObserver | undefined;
+  const submitHandler = async (event: SubmitEvent) => {
+    const form = event.target as HTMLFormElement | null;
+    if (!form?.matches?.(".newsletter-form")) return;
 
-  const addEmailLabels = (root: ParentNode) => {
-    root
-      .querySelectorAll<HTMLInputElement>('input[type="email"]')
-      .forEach(input => {
-        if (input.labels?.length) return;
-        if (!input.id) input.id = "island-newsletter-email";
+    event.preventDefault();
 
-        const label = document.createElement("label");
-        label.className = "newsletter-email-label";
-        label.htmlFor = input.id;
-        label.textContent = "Email";
-        input.before(label);
+    const status = form.querySelector<HTMLElement>(".newsletter-status");
+    const button = form.querySelector<HTMLButtonElement>(
+      'button[type="submit"]'
+    );
+    const email = form.querySelector<HTMLInputElement>('input[type="email"]');
+    const honeypot = form.querySelector<HTMLInputElement>(
+      'input[name="website"]'
+    );
+    const consent = form.querySelector<HTMLInputElement>(
+      'input[name="fields[consent]"]'
+    );
+    const endpoint = form.dataset.endpoint || form.getAttribute("action") || "";
+
+    if (!endpoint || !email || !button || !status) return;
+    if (honeypot?.value) return;
+
+    if (!form.reportValidity()) return;
+
+    const setStatus = (message: string, state: "success" | "error") => {
+      status.textContent = message;
+      status.dataset.state = state;
+    };
+
+    setStatus("", "success");
+    button.disabled = true;
+    const originalLabel = button.textContent;
+    button.textContent = "Subscribing…";
+
+    // Stamp what was agreed to and when, as evidence of the opt-in.
+    if (consent) {
+      const agreedAt = new Date().toISOString();
+      const agreedTo = consent.dataset.consentValue || "yes";
+      consent.value = `${agreedTo} at ${agreedAt}`;
+    }
+
+    // Send the form exactly as the browser would, so the consent field and the
+    // MailerLite hidden inputs go with it.
+    const data = new FormData(form);
+    data.set("fields[email]", email.value.trim());
+
+    const body = new URLSearchParams();
+    data.forEach((value, key) => {
+      if (typeof value === "string") body.append(key, value);
+    });
+
+    try {
+      const response = await fetch(endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body,
       });
+
+      const payload = await response.json().catch(() => null);
+
+      if (response.ok && payload?.success) {
+        form.reset();
+        setStatus(
+          "Thanks — check your inbox to confirm your subscription.",
+          "success"
+        );
+        return;
+      }
+
+      const message =
+        payload?.errors?.fields?.email?.[0] ??
+        payload?.errors?.message ??
+        "That didn't work. Please check your email address and try again.";
+      setStatus(message, "error");
+    } catch {
+      setStatus(
+        "Sorry, we couldn't reach the mailing list. Please try again in a moment.",
+        "error"
+      );
+    } finally {
+      button.disabled = false;
+      button.textContent = originalLabel;
+    }
   };
 
-  const observeNewsletterForm = () => {
-    emailLabelObserver?.disconnect();
-    const root = document.querySelector(".island-signup .ml-embedded");
-    if (!root) return;
-
-    addEmailLabels(root);
-    emailLabelObserver = new MutationObserver(() => addEmailLabels(root));
-    emailLabelObserver.observe(root, { childList: true, subtree: true });
-  };
-
-  document.addEventListener("astro:page-load", observeNewsletterForm);
-  observeNewsletterForm();
-</script>
-
-<script is:inline>
-  (function (w, d, e, u, f, l, n) {
-    w[f] =
-      w[f] ||
-      function () {
-        (w[f].q = w[f].q || []).push(arguments);
-      };
-    l = d.createElement(e);
-    l.async = 1;
-    l.src = u;
-    n = d.getElementsByTagName(e)[0];
-    n.parentNode.insertBefore(l, n);
-  })(
-    window,
-    document,
-    "script",
-    "https://assets.mailerlite.com/js/universal.js",
-    "ml"
-  );
-  ml("account", "2727806");
+  const w = window as typeof window & { __newsletterSubmitBound?: boolean };
+  if (!w.__newsletterSubmitBound) {
+    w.__newsletterSubmitBound = true;
+    document.addEventListener("submit", submitHandler);
+  }
 </script>

@@ -7,10 +7,10 @@
     @apply text-justify;
 
     h1 {
-      @apply text-3xl sm:text-4xl font-semibold text-accent;
+      @apply text-accent text-3xl font-semibold sm:text-4xl;
     }
     h2 {
-      @apply text-2xl sm:text-3xl font-semibold text-accent/90;
+      @apply text-accent/90 text-2xl font-semibold sm:text-3xl;
     }
 
     h3 {
@@ -21,7 +21,6 @@
     th {
       @apply text-foreground mb-3;
     }
-
 
     p,
     strong,
