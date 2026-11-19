@@ -15,7 +15,7 @@ The site and newsletter are run by Richard Bown, who is the data controller for 
 
 **If you sign up to the newsletter**, I collect the email address you submit (and your name, if you choose to give it). I use it for one purpose only: to send you occasional updates about _One More Island_, Richard Bown's writing, publication news and early reader offers.
 
-The legal basis for this is your **consent**, which you give by ticking the consent box and confirming your subscription. Every signup requires a confirmation email before you are added to the list, so nothing is sent to you until you have opted in twice.
+The legal basis for this is your **consent**, which you give by ticking the consent box and confirming your subscription. Every signup requires a confirmation email before you are added to the list, so nothing is sent to you until you have opted in twice. When you tick the box I also record the date and time, and the wording you agreed to, against your subscription so there is a record of your consent.
 
 **If you simply browse the site**, I collect standard analytics data as described below. I do not run advertising, tracking pixels or profiling.
 

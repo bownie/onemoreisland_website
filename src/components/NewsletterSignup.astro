@@ -9,6 +9,12 @@ const {
 // universal.js, which some browsers and ad blockers prevent from loading.
 const endpoint =
   "https://assets.mailerlite.com/jsonp/2727806/forms/201864919215245018/subscribe";
+
+// Proof of consent, stored against the subscriber in the MailerLite custom
+// field `consent` (Subscribers -> Fields, Text). MailerLite drops fields that
+// have not been created in the account, so that field has to exist for this
+// to be recorded; the signup itself still works either way.
+const consentValue = "yes - onemoreislandbook.com privacy policy v1";
 ---
 
 <section
@@ -51,8 +57,15 @@ const endpoint =
         />
       </div>
 
-      <label class="newsletter-consent">
-        <input type="checkbox" id="newsletter-consent" required />
+      <label class="newsletter-consent" for="newsletter-consent">
+        <input
+          type="checkbox"
+          id="newsletter-consent"
+          name="fields[consent]"
+          value={consentValue}
+          data-consent-value={consentValue}
+          required
+        />
         <span>
           Yes, email me occasional news about <em>One More Island</em> and
           Richard Bown's writing. I understand I can unsubscribe at any time.
@@ -92,6 +105,9 @@ const endpoint =
     const button = form.querySelector<HTMLButtonElement>('button[type="submit"]');
     const email = form.querySelector<HTMLInputElement>('input[type="email"]');
     const honeypot = form.querySelector<HTMLInputElement>('input[name="website"]');
+    const consent = form.querySelector<HTMLInputElement>(
+      'input[name="fields[consent]"]'
+    );
     const endpoint = form.dataset.endpoint || form.getAttribute("action") || "";
 
     if (!endpoint || !email || !button || !status) return;
@@ -109,10 +125,22 @@ const endpoint =
     const originalLabel = button.textContent;
     button.textContent = "Subscribing…";
 
+    // Stamp what was agreed to and when, as evidence of the opt-in.
+    if (consent) {
+      const agreedAt = new Date().toISOString();
+      const agreedTo = consent.dataset.consentValue || "yes";
+      consent.value = `${agreedTo} at ${agreedAt}`;
+    }
+
+    // Send the form exactly as the browser would, so the consent field and the
+    // MailerLite hidden inputs go with it.
+    const data = new FormData(form);
+    data.set("fields[email]", email.value.trim());
+
     const body = new URLSearchParams();
-    body.set("fields[email]", email.value.trim());
-    body.set("ml-submit", "1");
-    body.set("anticsrf", "true");
+    data.forEach((value, key) => {
+      if (typeof value === "string") body.append(key, value);
+    });
 
     try {
       const response = await fetch(endpoint, {
