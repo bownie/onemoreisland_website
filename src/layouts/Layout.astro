@@ -16,14 +16,18 @@ type Props = {
 
 const { site } = config;
 
+const defaultOgImage = resolveDefaultOgImagePath(config);
+
 const {
   title = site.title,
   description = site.description,
-  ogImage = resolveDefaultOgImagePath(config),
+  ogImage = defaultOgImage,
   canonicalURL = new URL(Astro.url.pathname, Astro.site).href,
 } = Astro.props;
 
 const socialImageURL = new URL(ogImage, Astro.site ?? Astro.url);
+const isDefaultOgImage =
+  socialImageURL.href === new URL(defaultOgImage, Astro.site ?? Astro.url).href;
 const socialImageAlt =
   "One More Island by Richard W. Bown — the book cover on a dark teal background";
 
@@ -111,10 +115,16 @@ const rssHref = getRelativeLocaleUrl(
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:image" content={socialImageURL} />
-    <meta property="og:image:type" content="image/jpeg" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content={socialImageAlt} />
+    {
+      isDefaultOgImage && (
+        <>
+          <meta property="og:image:type" content="image/jpeg" />
+          <meta property="og:image:width" content="1200" />
+          <meta property="og:image:height" content="630" />
+          <meta property="og:image:alt" content={socialImageAlt} />
+        </>
+      )
+    }
 
     <!-- Twitter / X -->
     <meta property="twitter:card" content="summary_large_image" />
@@ -122,7 +132,11 @@ const rssHref = getRelativeLocaleUrl(
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={socialImageURL} />
-    <meta property="twitter:image:alt" content={socialImageAlt} />
+    {
+      isDefaultOgImage && (
+        <meta property="twitter:image:alt" content={socialImageAlt} />
+      )
+    }
 
     <!-- RSS autodiscovery -->
     <link
