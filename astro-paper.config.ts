@@ -8,7 +8,7 @@ export default defineAstroPaperConfig({
     description: "Peter Watchett ran to Sandport to escape the life he built in London. When his estranged brother returns, Peter must face the truth and decide whether to start again.",
     author: "Richard Bown",
     profile: "https://hardbittensoftie.com",
-    ogImage: "one-more-island-social.jpg",
+    ogImage: "one-more-island-cover-v2.4.jpg",
     lang: "en",
     timezone: "Europe/Amsterdam",
     dir: "ltr",
