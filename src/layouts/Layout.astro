@@ -16,14 +16,59 @@ type Props = {
 
 const { site } = config;
 
+const defaultOgImage = resolveDefaultOgImagePath(config);
+
 const {
   title = site.title,
   description = site.description,
-  ogImage = resolveDefaultOgImagePath(config),
+  ogImage = defaultOgImage,
   canonicalURL = new URL(Astro.url.pathname, Astro.site).href,
 } = Astro.props;
 
 const socialImageURL = new URL(ogImage, Astro.site ?? Astro.url);
+const isDefaultOgImage =
+  socialImageURL.href === new URL(defaultOgImage, Astro.site ?? Astro.url).href;
+const socialImageAlt =
+  "One More Island by Richard W. Bown — the book cover on a dark teal background";
+
+const siteUrl = site.url;
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}#website`,
+      url: siteUrl,
+      name: site.title,
+      description: site.description,
+      inLanguage: site.lang,
+      publisher: { "@id": `${siteUrl}#author` },
+    },
+    {
+      "@type": "Person",
+      "@id": `${siteUrl}#author`,
+      name: "Richard W. Bown",
+      url: "https://hardbittensoftie.com",
+      sameAs: [
+        "https://hardbittensoftie.com",
+        "https://bsky.app/profile/bownie.bsky.social",
+        "https://www.linkedin.com/in/richard-bown/",
+      ],
+    },
+    {
+      "@type": "Book",
+      "@id": `${siteUrl}#book`,
+      name: "One More Island",
+      author: { "@id": `${siteUrl}#author` },
+      description: site.description,
+      image: socialImageURL.href,
+      url: siteUrl,
+      inLanguage: site.lang,
+      datePublished: "2027",
+    },
+  ],
+};
+
 const rssHref = getRelativeLocaleUrl(
   Astro.currentLocale ?? config.site.lang,
   "rss.xml"
@@ -39,7 +84,7 @@ const rssHref = getRelativeLocaleUrl(
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" href="/one-more-island-cover-v2.4.jpg" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="canonical" href={canonicalURL} />
     <meta name="generator" content={Astro.generator} />
 
@@ -70,6 +115,16 @@ const rssHref = getRelativeLocaleUrl(
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:image" content={socialImageURL} />
+    {
+      isDefaultOgImage && (
+        <>
+          <meta property="og:image:type" content="image/jpeg" />
+          <meta property="og:image:width" content="1200" />
+          <meta property="og:image:height" content="630" />
+          <meta property="og:image:alt" content={socialImageAlt} />
+        </>
+      )
+    }
 
     <!-- Twitter / X -->
     <meta property="twitter:card" content="summary_large_image" />
@@ -77,6 +132,11 @@ const rssHref = getRelativeLocaleUrl(
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={socialImageURL} />
+    {
+      isDefaultOgImage && (
+        <meta property="twitter:image:alt" content={socialImageAlt} />
+      )
+    }
 
     <!-- RSS autodiscovery -->
     <link
@@ -86,8 +146,11 @@ const rssHref = getRelativeLocaleUrl(
       href={new URL(rssHref, Astro.site)}
     />
 
-    <!-- Filled at runtime by theme.ts to match the current background colour -->
-    <meta name="theme-color" content="" />
+    <!-- Default matches the light background; theme.ts updates it at runtime -->
+    <meta name="theme-color" content="#fbf8f3" />
+
+    <!-- Structured data: WebSite, author Person and Book -->
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 
     <!-- Extra head content injected by child layouts (e.g. JSON-LD, article meta) -->
     <slot name="head" />
